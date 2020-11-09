@@ -12,15 +12,17 @@ public class TestSaludo {
         for (String unNombre : nombres) {
             empleados.add(new Thread(new Empleado(unSaludo, unNombre)));
         }
-        empleados.add(new Thread(new Jefe(unSaludo, "El PEPE", 4)));//Empieza en el empleado 0
+        empleados.add(new Thread(new Jefe(unSaludo, "El PEPE", nombres.length - 1)));// Empieza en el empleado 0
 
-        //Un bloque en Java usando expresiones lamdas.
+        // Un bloque en Java usando expresiones lamdas.
+        empleados.forEach(e -> e.start());
         empleados.forEach(e -> {
             try {
-                e.start();
+                e.join();
             } catch (Exception aException) {
                 System.out.println("ERROR: " + aException);
             }
         });
+        System.out.println("Todos saludadon A TRABAJAR");
     }
 }
