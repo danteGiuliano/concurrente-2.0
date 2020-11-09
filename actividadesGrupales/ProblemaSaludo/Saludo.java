@@ -1,4 +1,3 @@
-package actividadesGrupales.ProblemaSaludo;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -8,26 +7,26 @@ public class Saludo {
     private Condition grupoCompleto;
     private Condition llegoJefe;
     private int llegadaEmpleado;
+    private final int CANTIDAD_TOTAL;
 
-    public Saludo() {
+    public Saludo(int unaCantidad) {
         this.mutex = new ReentrantLock();
         this.llegadaEmpleado = 0;
+        this.CANTIDAD_TOTAL=unaCantidad;
         this.llegoJefe = mutex.newCondition();
         this.grupoCompleto=mutex.newCondition();
     }
 
-    public void esperarEmpleados(int unaCantidadEmpleados) throws Exception {
+    public void esperarEmpleados() throws Exception {
         this.mutex.lock();
-        while (this.llegadaEmpleado <= unaCantidadEmpleados) {
-            this.grupoCompleto.await();
-        }
+        this.grupoCompleto.await();
         this.llegoJefe.signalAll();
         this.mutex.unlock();
     }
     public void esperarJefe() throws Exception {
         this.mutex.lock();
         this.llegadaEmpleado++;
-        this.grupoCompleto.signal();
+        if(this.CANTIDAD_TOTAL<this.llegadaEmpleado){this.grupoCompleto.signal();};
         this.llegoJefe.await();  
         this.mutex.unlock();
         

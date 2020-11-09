@@ -1,4 +1,3 @@
-package actividadesGrupales.ProblemaSaludo;
 
 import java.util.ArrayList;
 
@@ -6,13 +5,13 @@ public class TestSaludo {
 
     public static void main(String[] args) {
         ArrayList<Thread> empleados = new ArrayList<Thread>();
-        Saludo unSaludo = new Saludo();
         String nombres[] = { "Diego", "Anabela", "Dana", "Marito", "Bin" };
+        Saludo unSaludo = new Saludo(nombres.length-1);
 
         for (String unNombre : nombres) {
             empleados.add(new Thread(new Empleado(unSaludo, unNombre)));
         }
-        empleados.add(new Thread(new Jefe(unSaludo, "El PEPE", nombres.length - 1)));// Empieza en el empleado 0
+        empleados.add(new Thread(new Jefe(unSaludo, "El PEPE")));// Empieza en el empleado 0
 
         // Un bloque en Java usando expresiones lamdas.
         empleados.forEach(e -> e.start());
@@ -23,6 +22,6 @@ public class TestSaludo {
                 System.out.println("ERROR: " + aException);
             }
         });
-        System.out.println("Todos saludadon A TRABAJAR");
+        System.out.println("Todos saludaron A TRABAJAR");
     }
 }

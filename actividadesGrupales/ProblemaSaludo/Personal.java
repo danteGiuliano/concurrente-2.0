@@ -1,4 +1,3 @@
-package actividadesGrupales.ProblemaSaludo;
 
 abstract class Personal implements Runnable{
     protected String nombre;

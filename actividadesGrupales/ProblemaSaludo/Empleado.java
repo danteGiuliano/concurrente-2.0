@@ -1,4 +1,3 @@
-package actividadesGrupales.ProblemaSaludo;
 
 public class Empleado extends Personal {
 

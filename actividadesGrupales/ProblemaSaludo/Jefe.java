@@ -1,15 +1,12 @@
-package actividadesGrupales.ProblemaSaludo;
 
 public class Jefe extends Personal {
-    private int numeroEmpleados;
 
-    public Jefe(Saludo unSaludo, String unNombre, int unNumeroDeEmpleados) {
+    public Jefe(Saludo unSaludo, String unNombre) {
         super(unSaludo, unNombre);
-        this.numeroEmpleados = unNumeroDeEmpleados;
     }
 
     public void saludo()throws Exception {
-        this.saludo.esperarEmpleados(this.numeroEmpleados);
+        this.saludo.esperarEmpleados();
         System.out.println(this.nombre+" Bienvenidxs");
     }
 
