@@ -10,7 +10,7 @@ public class Saludo {
     private int llegadaEmpleado;
 
     public Saludo() {
-        this.mutex = new ReentrantLock(true);
+        this.mutex = new ReentrantLock();
         this.llegadaEmpleado = 0;
         this.llegoJefe = mutex.newCondition();
         this.grupoCompleto=mutex.newCondition();
