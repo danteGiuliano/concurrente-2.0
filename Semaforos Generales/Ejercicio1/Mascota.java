@@ -1,6 +1,4 @@
-
 public class Mascota extends Thread{
-
  private String tipo;
  private Comedor unComedero;
  //Ejercicio 2.
@@ -10,8 +8,6 @@ public class Mascota extends Thread{
      this.unComedero=unComedor;
      //Ejercicio 2.
      this.raciones=raciones;
-     
-     
 }
 public void run(){
     try{

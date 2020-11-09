@@ -1,4 +1,3 @@
-
 import java.util.concurrent.Semaphore;
 
 public class Comedor {
@@ -39,6 +38,5 @@ public synchronized void cambioTurno(){
 public boolean puedeComer(int raciones)throws Exception{
     return this.platos.tryAcquire(raciones);
 }
-
 }
 

@@ -11,9 +11,9 @@ public class Avion extends Thread {
             System.out.println(Thread.currentThread().getName()+" Iniciado");
             Thread.sleep(100);
             while(true){
-                if(this.unaTorre.permisoDePista()){
+                if(this.unaTorre.permisoPista(this.estado)){
                     //Aqui usaria la pista tomandose su tiempo, notifica que abandona la pista
-                    this.unaTorre.abandonaPista();
+                    this.unaTorre.abandonoLaPista();
                 }
                 Thread.sleep(100);
             }

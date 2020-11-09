@@ -1,4 +1,3 @@
-
 public class Main {
      static Comedor unComedor = new Comedor(4,"perro","gato");
     public static void main(String[] args) {

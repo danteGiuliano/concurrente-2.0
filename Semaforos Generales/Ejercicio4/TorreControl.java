@@ -1,4 +1,5 @@
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class TorreControl {
     private Semaphore permisos;
@@ -12,7 +13,7 @@ public class TorreControl {
         this.prioridad = "despegue";
         this.prioridad = "aterrizaje";
         this.permisos = new Semaphore(cantidad);
-        this.mutex=new ReentrankLock();
+        this.mutex=new ReentrantLock();
     }
     public synchronized boolean permisoPista(String estado){
        boolean flag=true;
@@ -23,12 +24,12 @@ public class TorreControl {
             if(this.permisos.availablePermits()==0){
                 this.cambiarPriodidad();
         }
-        return flag;
     }
-}
-    private void abandonoLaPista()throws Exception{
+    return flag;
+    }
+    public void abandonoLaPista()throws Exception{
         this.mutex.lock();
-        if(this.permisoPista.availablePermits()==0){
+        if(this.permisos.availablePermits()==0){
             this.permisos.release(this.cantidad);
         }
         this.mutex.unlock();
