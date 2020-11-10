@@ -20,7 +20,6 @@ public class Saludo {
     public void esperarEmpleados() throws Exception {
         this.mutex.lock();
         this.grupoCompleto.await();
-        this.llegoJefe.signalAll();
         this.mutex.unlock();
     }
     public void esperarJefe() throws Exception {
@@ -29,6 +28,10 @@ public class Saludo {
         if(this.CANTIDAD_TOTAL<this.llegadaEmpleado){this.grupoCompleto.signal();};
         this.llegoJefe.await();  
         this.mutex.unlock();
-        
+    }
+    public void esperarSaludo()throws Exception{
+        this.mutex.lock();
+        this.llegoJefe.signalAll();
+        this.mutex.unlock();
     }
 }

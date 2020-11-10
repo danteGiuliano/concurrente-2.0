@@ -8,6 +8,7 @@ public class Jefe extends Personal {
     public void saludo()throws Exception {
         this.saludo.esperarEmpleados();
         System.out.println(this.nombre+" Bienvenidxs");
+        this.saludo.esperarSaludo();
     }
 
 }
