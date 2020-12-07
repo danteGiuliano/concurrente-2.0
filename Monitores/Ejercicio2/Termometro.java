@@ -26,7 +26,6 @@ public class Termometro implements Runnable {
         }
     }
     private void medirTemperatura(){
-        int aux=(factor.nextBoolean())?1:-1;
-        this.temperaturaActual=this.temperaturaActual+(aux*(int)(10*factor.nextDouble()));
+        this.temperaturaActual=this.factor.nextInt(40); //Correccion 13-11
     }
 }

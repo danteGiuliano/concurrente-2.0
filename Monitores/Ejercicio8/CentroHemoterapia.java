@@ -1,13 +1,15 @@
+import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class CentroHomoterapia {
+public class CentroHemoterapia {
+    private Queue ordenEspera;
     private ReentrantLock mutex;
     private Condition esperaLeyendo, esperaViendoTele, atencionPaciente;
     private int cantidadCamillas, cantidadRevistas;
     private static int CANTIDAD_MAXIMA_CAMILLAS, CANTIDAD_MAXIMA_REVISTAS;
 
-    public CentroHomoterapia(int unaCantidadDeCamillas, int unaCantidadDeRevistas) {
+    public CentroHemoterapia(int unaCantidadDeCamillas, int unaCantidadDeRevistas) {
         this.mutex = new ReentrantLock();
         this.esperaLeyendo = mutex.newCondition();
         this.esperaViendoTele = mutex.newCondition();
@@ -19,13 +21,16 @@ public class CentroHomoterapia {
     }
 
     // logica de la clase Persona.
-    public void entradaCentro() throws Exception {
+    public void entradaCentro(Thread thread) throws Exception {
         this.mutex.lock();
         while (this.cantidadRevistas == CANTIDAD_MAXIMA_REVISTAS) {
             this.esperaViendoTele.await();
         }
-        this.cantidadRevistas++;
-        this.esperaLeyendo.await();
+        if(this.cantidadCamillas>CANTIDAD_MAXIMA_CAMILLAS){
+            this.cantidadRevistas++;
+            this.ordenEspera.add(thread);
+            this.esperaLeyendo.await();
+        }
         this.mutex.unlock();
     }
 

@@ -39,8 +39,12 @@ public class GestorSala {
         this.mutex.unlock();
     }
 
-    public void notificarTemperatura(int temperatura){ //Solo lo ejecuta 1 hilo..
-        this.cantidadMaximaDePersonasPermitidas=(temperatura>this.temperaturaUmbral)?30:50;
+    public void notificarTemperatura(int temperatura)throws Exception{ 
+        this.mutex.lock();
+        this.cantidadMaximaDePersonasPermitidas=(temperatura>this.temperaturaUmbral)?35:50;
+        System.out.println("CANTIDAD MAXIMA -------------------------->"+this.cantidadMaximaDePersonasPermitidas);
+        this.temperatura.signalAll(); //Correccion del 13-11.
+        this.mutex.unlock();
     }
 
     private void puertaEntrada()throws Exception{

@@ -1,8 +1,8 @@
 public class Persona implements Runnable {
 
-    private CentroHomoterapia unCentro;
+    private CentroHemoterapia unCentro;
 
-    public Persona(CentroHomoterapia unCentro) {
+    public Persona(CentroHemoterapia unCentro) {
         this.unCentro = unCentro;
     }
 
@@ -11,7 +11,7 @@ public class Persona implements Runnable {
             System.out.println("Persosna " + Thread.currentThread().getName() + " Iniciado.");
             Thread.sleep(100);
             // Rutina de Persona
-            this.unCentro.entradaCentro();
+            this.unCentro.entradaCentro(this);
             System.out.println(Thread.currentThread().getName() + " Esperando atencion");
             this.unCentro.atencionMedico();
             System.out.println(Thread.currentThread().getName() + " Atendido se va!");
